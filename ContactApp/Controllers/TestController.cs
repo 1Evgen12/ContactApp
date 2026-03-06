@@ -11,7 +11,12 @@ namespace ContactApp.Controllers
         {
             return "Hello world!";
         }
+    }
 
+    [ApiController]
+    [Route("api/[controller]")]
+    public class HelloController : ControllerBase
+    {
         [HttpGet("hello/{name}")]
         public string GetGreetingByName(string name)
         {
