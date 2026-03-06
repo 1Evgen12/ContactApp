@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactApp.API.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
-namespace ContactApp.API.Controllers
+public class HelloController : BaseController
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class HelloController : ControllerBase
+    [HttpGet("hello/{name}")]
+    public string GetGreetingByName(string name)
     {
-        [HttpGet("hello/{name}")]
-        public string GetGreetingByName(string name)
-        {
-            return $"Привет, {name}!";
-        }
+        return $"Привет, {name}!";
     }
 }
+

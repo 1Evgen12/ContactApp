@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactApp.API.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
-namespace ContactApp.API.Controllers
+public class TestController : BaseController
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TestController : ControllerBase
+    [HttpGet("test")]
+    public string GetHelloWorldText()
     {
-        [HttpGet("test")]
-        public string GetHelloWorldText()
-        {
-            return "Hello world!";
-        }
+        return "Hello world!";
     }
 }
+
