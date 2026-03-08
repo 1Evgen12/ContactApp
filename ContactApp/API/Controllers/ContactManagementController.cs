@@ -15,27 +15,34 @@ namespace ContactApp.API.Controllers
         }
 
         [HttpPost("contacts")]
-        public void Create([FromBody] Contact contact)
+        public IActionResult Create([FromBody] Contact contact)
         {
-            storage.Add(contact);
+            bool res = storage.Add(contact);
+            if (res) return Ok(contact);
+            return Conflict("Контакт с таким уже ID существует");
+
         }
 
         [HttpGet("contacts")]
-        public List<Contact> Contact()
+        public ActionResult<List<Contact>> GetContacts()
         {
-            return storage.GetContacts();
+            return Ok(storage.GetContacts());
         }
 
         [HttpPut("contacts/{id}")]
-        public void UpdateContact([FromBody]ContactDto contactDto, int id)
+        public IActionResult UpdateContact([FromBody]ContactDto contactDto, int id)
         {
-            storage.UpdateContact(contactDto, id);
+            bool res = storage.UpdateContact(contactDto, id);
+            if(res) return Ok();
+            return Conflict("Контакт с таким ID не существует");
         }
 
         [HttpDelete("contacts/{id}")]
-        public void DeleteContact(int id)
+        public IActionResult DeleteContact(int id)
         {
-            storage.Remove(id);
+            bool res = storage.Remove(id);
+            if(res) return Ok();
+            return BadRequest("Ошибка id");
         }
     }
 }

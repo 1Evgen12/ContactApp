@@ -22,19 +22,25 @@ namespace ContactApp.API.Storage
                     PhoneNumber = $"Телефон {i}"
                 });
             }
-
-
         }
 
         public List<Contact> GetContacts()
         {
             return this.Contacts;
         }
-        public void Add(Contact contact) {
+        public bool Add(Contact contact) {
+
+            foreach (var item in Contacts)
+            {
+                if (item.ID == contact.ID) 
+                    return false;
+            }
+
             Contacts.Add (contact);
+            return true;
         }
 
-        public void Remove(int id) {
+        public bool Remove(int id) {
 
 
             Contact contact;
@@ -44,11 +50,12 @@ namespace ContactApp.API.Storage
                 {
                     contact = Contacts[i];
                     Contacts.Remove(contact);
-                    return;
+                    return true;
                 }
             }
+            return false;
         }
-        public void UpdateContact(ContactDto contactDto, int id)
+        public bool UpdateContact(ContactDto contactDto, int id)
         {
             Contact contact;
             for (int i = 0; i < Contacts.Count; i++)
@@ -72,8 +79,10 @@ namespace ContactApp.API.Storage
                     {
                         contact.Address = contactDto.Address;
                     }
+                    return true;
                 }
             }
+            return false;
         }
     }
 }
