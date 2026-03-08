@@ -17,58 +17,25 @@ namespace ContactApp.API.Controllers
         [HttpPost("contacts")]
         public void Create([FromBody] Contact contact)
         {
-            storage.Contacts.Add(contact);
+            storage.Add(contact);
         }
 
         [HttpGet("contacts")]
         public List<Contact> Contact()
         {
-            return storage.Contacts;
+            return storage.GetContacts();
         }
 
         [HttpPut("contacts/{id}")]
         public void UpdateContact([FromBody]ContactDto contactDto, int id)
         {
-            Contact contact;
-            for (int i = 0; i < storage.Contacts.Count; i++)
-            {
-                if (storage.Contacts[i].ID == id)
-                {
-                    contact = storage.Contacts[i];
-                    if (!String.IsNullOrEmpty(contactDto.Email)) 
-                    { 
-                        contact.Email = contactDto.Email; 
-                    }
-                    if (!String.IsNullOrEmpty(contactDto.Name))
-                    {
-                        contact.Name = contactDto.Name;
-                    }
-                    if (!String.IsNullOrEmpty(contactDto.PhoneNumber))
-                    {
-                        contact.PhoneNumber = contactDto.PhoneNumber;
-                    }
-                    if (!String.IsNullOrEmpty(contactDto.Address))
-                    {
-                        contact.Address = contactDto.Address;
-                    }
-                    
-                }
-            }
+            storage.UpdateContact(contactDto, id);
         }
 
         [HttpDelete("contacts/{id}")]
         public void DeleteContact(int id)
         {
-            Contact contact;
-            for (int i = 0; i < storage.Contacts.Count; i++)
-            {
-                if (storage.Contacts[i].ID == id)
-                {
-                    contact = storage.Contacts[i];
-                    storage.Contacts.Remove(contact);
-                    return;
-                }
-            }
+            storage.Remove(id);
         }
     }
 }
