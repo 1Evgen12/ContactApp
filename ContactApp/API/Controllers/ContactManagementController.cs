@@ -18,15 +18,26 @@ namespace ContactApp.API.Controllers
         public IActionResult Create([FromBody] Contact contact)
         {
             bool res = storage.Add(contact);
-            if (res) return Ok(contact);
+            if (res) return Created();
             return Conflict("Контакт с таким уже ID существует");
-
         }
 
         [HttpGet("contacts")]
         public ActionResult<List<Contact>> GetContacts()
         {
             return Ok(storage.GetContacts());
+        }
+        [HttpGet("contacts/{id}")]
+        public ActionResult<Contact> GetContactById(int id)
+        {
+            if (id <= 0) return BadRequest("Некорректный id");
+
+            Contact contact = storage.GetContactById(id);
+            if (contact == null) return NotFound("Контакт не найден");
+            else
+            {
+                return Ok(contact);
+            }
         }
 
         [HttpPut("contacts/{id}")]

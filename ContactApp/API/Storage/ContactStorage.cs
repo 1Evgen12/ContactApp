@@ -28,6 +28,15 @@ namespace ContactApp.API.Storage
         {
             return this.Contacts;
         }
+        public Contact GetContactById(int id)
+        {
+            foreach (var item in Contacts)
+            {
+                if (item.ID == id)
+                    return item;
+            }
+            return null;
+        }
         public bool Add(Contact contact) {
 
             foreach (var item in Contacts)
