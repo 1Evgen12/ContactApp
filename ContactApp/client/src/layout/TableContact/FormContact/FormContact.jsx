@@ -6,6 +6,11 @@ const FormContact = (props) => {
     const [contactAddress, setContactAddress] = useState("")
 
     const submit = () => {
+
+        if (contactName.trim() == "" || contactEmail.trim() == "" ||
+            contactPhone.trim() == "" || contactAddress.trim() == "") {
+            return;
+        }
         props.addContact(contactName, contactEmail, contactPhone, contactAddress)
     }
 
@@ -14,32 +19,35 @@ const FormContact = (props) => {
             <div className="mb-3">
                 <form>
                     <div className="mb-3">
+                        <label className="form-label">
+                            Введите имя:
+                        </label>
                         <input className="form-control" type="text"
-                            placeholder="Введите имя:"
+                            placeholder="имя:"
                             onChange={(e) => { setContactName(e.target.value) }} />
                     </div>
                     <div className="mb-3">
-                        {/* <label className="form-label">
+                        <label className="form-label">
                             Введите E-mail:
-                        </label> */}
+                        </label>
                         <input className="form-control" type="text"
-                            placeholder="Введите E-mail:"
+                            placeholder="e-mail:"
                             onChange={(e) => { setContactEmail(e.target.value) }} />
                     </div>
                     <div className="mb-3">
-                        {/* <label className="form-label">
+                        <label className="form-label">
                             Введите номер телефона:
-                        </label> */}
+                        </label>
                         <input className="form-control" type="text"
-                            placeholder="Введите номер телефона:"
+                            placeholder="телефон:"
                             onChange={(e) => { setContactPhone(e.target.value) }} />
                     </div>
                     <div className="mb-3">
-                        {/* <label className="form-label">
+                        <label className="form-label">
                             Введите адрес:
-                        </label> */}
+                        </label>
                         <input className="form-control" type="text"
-                            placeholder="Введите адрес:"
+                            placeholder="адрес:"
                             onChange={(e) => { setContactAddress(e.target.value) }}
                         />
                     </div>
