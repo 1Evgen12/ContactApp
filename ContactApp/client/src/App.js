@@ -1,5 +1,11 @@
 import TableContact from "./layout/TableContact/TableContact";
 
+const contacts = [
+  { id: 1, name: "Имя Фамилия 1", email: "q@e1.rt", phone: "phone 1", address: "address 1" },
+  { id: 2, name: "Имя Фамилия 2", email: "q@e2.rt", phone: "phone 2", address: "address 2" },
+  { id: 3, name: "Имя Фамилия 3", email: "q@e3.rt", phone: "phone 3", address: "address 3" },
+]
+
 const App = () => {
   return (
     <div className="container mt-5">
@@ -9,7 +15,7 @@ const App = () => {
         </div>
 
         <div className="card-body">
-          <TableContact />
+          <TableContact contacts={contacts} />
         </div>
       </div>
     </div>
