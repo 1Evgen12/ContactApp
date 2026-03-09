@@ -9,14 +9,14 @@ const App = () => {
     { id: 3, name: "Имя Фамилия 3", email: "q@e3.rt", phone: "phone 3", address: "address 3" },
   ])
 
-  const addContact = () => {
+  const addContact = (contactName, contactEmail, contactPhone, contactAddress) => {
     const Id = Math.max(...contacts.map(e => e.id)) + 1;
     const item = {
       id: Id,
-      name: "Имя Фамилия 1",
-      email: "q@e1.rt",
-      phone: "phone 1",
-      address: "address 1"
+      name: contactName,
+      email: contactEmail,
+      phone: contactPhone,
+      address: contactAddress
     }
     setContacts([...contacts, item]);
   }
