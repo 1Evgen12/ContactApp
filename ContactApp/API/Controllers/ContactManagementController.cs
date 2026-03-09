@@ -30,10 +30,12 @@ namespace ContactApp.API.Controllers
         [HttpGet("contacts/{id}")]
         public ActionResult<Contact> GetContactById(int id)
         {
-            if (id <= 0) return BadRequest("Некорректный id");
+            if (id <= 0) 
+                return BadRequest("Некорректный id");
 
             Contact contact = storage.GetContactById(id);
-            if (contact == null) return NotFound("Контакт не найден");
+            if (contact == null) 
+                return NotFound("Контакт не найден");
             else
             {
                 return Ok(contact);
