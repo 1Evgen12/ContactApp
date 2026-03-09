@@ -1,9 +1,39 @@
-import './App.css';
-
 function App() {
   return (
-    <div className="App">
-
+    <div>
+      <div>
+        <div>
+          <h1>Список контактов</h1>
+        </div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Имя контакта</th>
+                <th>E-mail</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Имя Фамилия 1</td>
+                <td>example@email1.ru</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Имя Фамилия 2</td>
+                <td>example@email2.ru</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Имя Фамилия 3</td>
+                <td>example@email3.ru</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
