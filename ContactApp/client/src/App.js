@@ -1,4 +1,4 @@
-import FormContact from "./layout/TableContact/FormContact/FormContact";
+import FormContact from "./layout/FormContact/FormContact";
 import TableContact from "./layout/TableContact/TableContact";
 import React, { useState } from "react";
 
