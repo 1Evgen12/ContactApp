@@ -11,7 +11,11 @@ const FormContact = (props) => {
             contactPhone.trim() == "" || contactAddress.trim() == "") {
             return;
         }
-        props.addContact(contactName, contactEmail, contactPhone, contactAddress)
+        props.addContact(contactName, contactEmail, contactPhone, contactAddress);
+        setContactName("");
+        setContactEmail("");
+        setContactPhone("");
+        setContactAddress("");
     }
 
     return (
@@ -24,7 +28,8 @@ const FormContact = (props) => {
                         </label>
                         <input className="form-control" type="text"
                             placeholder="имя:"
-                            onChange={(e) => { setContactName(e.target.value) }} />
+                            onChange={(e) => { setContactName(e.target.value) }}
+                            value={contactName} />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">
@@ -32,7 +37,8 @@ const FormContact = (props) => {
                         </label>
                         <input className="form-control" type="text"
                             placeholder="e-mail:"
-                            onChange={(e) => { setContactEmail(e.target.value) }} />
+                            onChange={(e) => { setContactEmail(e.target.value) }}
+                            value={contactEmail} />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">
@@ -40,7 +46,8 @@ const FormContact = (props) => {
                         </label>
                         <input className="form-control" type="text"
                             placeholder="телефон:"
-                            onChange={(e) => { setContactPhone(e.target.value) }} />
+                            onChange={(e) => { setContactPhone(e.target.value) }}
+                            value={contactPhone} />
                     </div>
                     <div className="mb-3">
                         <label className="form-label">
@@ -49,6 +56,7 @@ const FormContact = (props) => {
                         <input className="form-control" type="text"
                             placeholder="адрес:"
                             onChange={(e) => { setContactAddress(e.target.value) }}
+                            value={contactAddress}
                         />
                     </div>
                 </form>
