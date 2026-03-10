@@ -6,7 +6,6 @@ const FormContact = (props) => {
     const [contactAddress, setContactAddress] = useState("")
 
     const submit = () => {
-
         if (contactName.trim() == "" || contactEmail.trim() == "" ||
             contactPhone.trim() == "" || contactAddress.trim() == "") {
             return;
