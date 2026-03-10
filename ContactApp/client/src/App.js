@@ -23,6 +23,7 @@ const App = () => {
       phone: contactPhone,
       address: contactAddress
     }
+    axios.post(url, item);
     setContacts([...contacts, item]);
   }
 
