@@ -28,6 +28,7 @@ const App = () => {
   }
 
   const deleteContact = (id) => {
+    axios.delete(`${url}/${id}`)
     setContacts(contacts.filter(item => item.id !== id))
   }
 
