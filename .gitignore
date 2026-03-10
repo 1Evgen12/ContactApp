@@ -388,3 +388,5 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 package.json
+ContactApp/client/package-lock.json
+ContactApp/client/package.json

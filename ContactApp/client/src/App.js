@@ -1,8 +1,12 @@
 import FormContact from "./layout/FormContact/FormContact";
 import TableContact from "./layout/TableContact/TableContact";
 import React, { useState } from "react";
-
+import axios from 'axios';
 const App = () => {
+  const url = "http://localhost:5000/api/ContactManagement/contacts"
+  axios.get(url).then(
+    res => console.log(res.data)
+  );
   const [contacts, setContacts] = useState([
     { id: 1, name: "Имя Фамилия 1", email: "q@e1.rt", phone: "phone 1", address: "address 1" },
     { id: 2, name: "Имя Фамилия 2", email: "q@e2.rt", phone: "phone 2", address: "address 2" },
