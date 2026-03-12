@@ -1,15 +1,17 @@
 ﻿using ContactApp.API.ModelDto;
 using ContactApp.Model;
 using Microsoft.Data.Sqlite;
+using System.Text;
 
 namespace ContactApp.API.Storage
 {
     public class SqliteStorage : IStorage
     {
+        string connectionString = "Data Source=API/contacts.db";
+
         public List<Contact> GetContacts()
         {
             var contacts = new List<Contact>();
-            string connectionString = "Data Source=API/contacts.db";
             using var connection = new SqliteConnection(connectionString);
             connection.Open();
             var command = connection.CreateCommand();
@@ -35,7 +37,15 @@ namespace ContactApp.API.Storage
         }
         public bool Add(Contact contact)
         {
-            throw new NotImplementedException();
+            using var connection = new SqliteConnection(connectionString);
+            connection.Open();
+            var command = connection.CreateCommand();
+            string sql = new StringBuilder()
+            .Append("INSERT INTO contacts(name, email, phone, address) VALUES")
+                .Append($"('{contact.Name}','{contact.Email}','{contact.PhoneNumber}','{contact.Address}');").ToString();
+            command.CommandText = sql;
+            Console.WriteLine("sql >> "+sql);
+            return command.ExecuteNonQuery()>0;
         }
 
         public bool UpdateContact(ContactDto contactDto, int id)
