@@ -40,10 +40,15 @@ namespace ContactApp.API.Storage
             using var connection = new SqliteConnection(connectionString);
             connection.Open();
             var command = connection.CreateCommand();
-            string sql = new StringBuilder()
-            .Append("INSERT INTO contacts(name, email, phone, address) VALUES")
-                .Append($"('{contact.Name}','{contact.Email}','{contact.PhoneNumber}','{contact.Address}');").ToString();
+            //string sql = new StringBuilder()
+            //.Append("INSERT INTO contacts(name, email, phone, address) VALUES")
+            //    .Append($"('{contact.Name}','{contact.Email}','{contact.PhoneNumber}','{contact.Address}');").ToString();
+            string sql = "INSERT INTO contacts(name, email, phone, address) VALUES (@name, @email, @phone, @address);";
             command.CommandText = sql;
+            command.Parameters.AddWithValue("@name", contact.Name);
+            command.Parameters.AddWithValue("@email", contact.Email);
+            command.Parameters.AddWithValue("@phone", contact.PhoneNumber);
+            command.Parameters.AddWithValue("@address", contact.Address);
             Console.WriteLine("sql >> "+sql);
             return command.ExecuteNonQuery()>0;
         }
