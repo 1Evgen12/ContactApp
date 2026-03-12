@@ -7,14 +7,20 @@ namespace ContactApp.API.Storage
 {
     public class SqliteStorage : IStorage
     {
-        string connectionString = "Data Source=API/contacts.db";
+        private readonly string connectionString;
 
+        public SqliteStorage(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+        
         public List<Contact> GetContacts()
         {
             var contacts = new List<Contact>();
             using var connection = new SqliteConnection(connectionString);
             connection.Open();
             var command = connection.CreateCommand();
+            Console.WriteLine("________" +connectionString);
             command.CommandText = "SELECT * FROM contacts";
             using var reader = command.ExecuteReader();
             while (reader.Read())
@@ -28,7 +34,6 @@ namespace ContactApp.API.Storage
                     Address = reader.IsDBNull(3) ? null : reader.GetString(4)
                 });
             }
-
             return contacts;
         }
         public Contact GetContactById(int id)
