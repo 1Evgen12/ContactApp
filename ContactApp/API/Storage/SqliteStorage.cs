@@ -49,13 +49,26 @@ namespace ContactApp.API.Storage
             command.Parameters.AddWithValue("@email", contact.Email);
             command.Parameters.AddWithValue("@phone", contact.PhoneNumber);
             command.Parameters.AddWithValue("@address", contact.Address);
-            Console.WriteLine("sql >> "+sql);
+            //Console.WriteLine("sql >> "+sql);
             return command.ExecuteNonQuery()>0;
         }
 
         public bool UpdateContact(ContactDto contactDto, int id)
         {
-            throw new NotImplementedException();
+            using var connection = new SqliteConnection(connectionString);
+            connection.Open();
+            var command = connection.CreateCommand();
+            string sql = "UPDATE contacts " +
+                "SET name=@name, email=@email, phone=@phone, address=@address " +
+                "WHERE id = @id;";
+            command.CommandText = sql;
+            command.Parameters.AddWithValue("@name", contactDto.Name);
+            command.Parameters.AddWithValue("@email", contactDto.Email);
+            command.Parameters.AddWithValue("@phone", contactDto.PhoneNumber);
+            command.Parameters.AddWithValue("@address", contactDto.Address);
+            command.Parameters.AddWithValue("@id", id);
+
+            return command.ExecuteNonQuery()>0;            
         }
 
         public bool Remove(int id)
