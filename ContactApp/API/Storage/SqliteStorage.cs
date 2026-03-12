@@ -33,7 +33,22 @@ namespace ContactApp.API.Storage
         }
         public Contact GetContactById(int id)
         {
-            throw new NotImplementedException();
+            Contact contact=new Contact();
+            using var connection = new SqliteConnection(connectionString);
+            connection.Open();
+            var command = connection.CreateCommand();
+            command.CommandText = $"SELECT * FROM contacts WHERE id = {id}";
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                contact.ID = reader.GetInt32(0);
+                contact.Name = reader.GetString(1);
+                contact.Email = reader.GetString(2);
+                contact.PhoneNumber = reader.IsDBNull(3) ? null : reader.GetString(3);
+                contact.Address = reader.IsDBNull(3) ? null : reader.GetString(4);              
+            }
+
+            return contact;
         }
         public bool Add(Contact contact)
         {
