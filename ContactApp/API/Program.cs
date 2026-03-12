@@ -6,7 +6,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<ContactStorage>();
+builder.Services.AddSingleton<IStorage, SqliteStorage>();
 builder.Services.AddCors(opt =>
     opt.AddPolicy("CorsPolicy", policy =>
     {

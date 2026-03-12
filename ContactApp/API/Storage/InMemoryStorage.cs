@@ -3,11 +3,11 @@ using ContactApp.Model;
 
 namespace ContactApp.API.Storage
 {
-    public class ContactStorage
+    public class InMemoryStorage: IStorage
     {
         private List<Contact> Contacts { get; set; }
 
-        public ContactStorage()
+        public InMemoryStorage()
         {
             Contacts = new List<Contact>();
 
