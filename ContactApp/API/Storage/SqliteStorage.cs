@@ -60,7 +60,12 @@ namespace ContactApp.API.Storage
 
         public bool Remove(int id)
         {
-            throw new NotImplementedException();
+            using var connection = new SqliteConnection(connectionString);
+            connection.Open();
+            var command = connection.CreateCommand();
+            string sql = $"DELETE FROM contacts WHERE id = {id}";
+            command.CommandText = sql;
+            return command.ExecuteNonQuery()>0;
         }
 
         
