@@ -1,7 +1,6 @@
-﻿using ContactApp.API.ModelDto;
-using ContactApp.Model;
+﻿using ContactApp.API.Model;
+using ContactApp.API.ModelDto;
 using Microsoft.Data.Sqlite;
-using System.Text;
 
 namespace ContactApp.API.Storage
 {
@@ -20,7 +19,6 @@ namespace ContactApp.API.Storage
             using var connection = new SqliteConnection(connectionString);
             connection.Open();
             var command = connection.CreateCommand();
-            Console.WriteLine("________" +connectionString);
             command.CommandText = "SELECT * FROM contacts";
             using var reader = command.ExecuteReader();
             while (reader.Read())
@@ -59,10 +57,7 @@ namespace ContactApp.API.Storage
         {
             using var connection = new SqliteConnection(connectionString);
             connection.Open();
-            var command = connection.CreateCommand();
-            //string sql = new StringBuilder()
-            //.Append("INSERT INTO contacts(name, email, phone, address) VALUES")
-            //    .Append($"('{contact.Name}','{contact.Email}','{contact.PhoneNumber}','{contact.Address}');").ToString();
+            var command = connection.CreateCommand();          
             string sql = "INSERT INTO contacts(name, email, phone, address) VALUES (@name, @email, @phone, @address);";
             command.CommandText = sql;
             command.Parameters.AddWithValue("@name", contact.Name);

@@ -1,6 +1,6 @@
-﻿using ContactApp.API.ModelDto;
+﻿using ContactApp.API.Model;
+using ContactApp.API.ModelDto;
 using ContactApp.API.Storage;
-using ContactApp.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactApp.API.Controllers

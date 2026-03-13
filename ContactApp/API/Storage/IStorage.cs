@@ -1,5 +1,5 @@
 ﻿using ContactApp.API.ModelDto;
-using ContactApp.Model;
+using ContactApp.API.Model;
 
 namespace ContactApp.API.Storage
 {

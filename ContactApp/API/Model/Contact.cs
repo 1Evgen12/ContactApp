@@ -1,4 +1,4 @@
-﻿namespace ContactApp.Model
+﻿namespace ContactApp.API.Model
 {
     public class Contact
     {
