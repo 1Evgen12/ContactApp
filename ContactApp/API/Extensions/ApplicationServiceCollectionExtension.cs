@@ -1,0 +1,35 @@
+﻿using ContactApp.API.Storage;
+
+namespace ContactApp.API.Extensions
+{
+    public static class ApplicationServiceCollectionExtension
+    {
+        public static IServiceCollection AddServiceCollection(this IServiceCollection services, 
+            ConfigurationManager configuration)
+        {
+
+            services.AddControllers();
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("v1", new Microsoft.OpenApi.OpenApiInfo
+                {
+                    Title = "API списка контактов",
+                });
+            });
+            services.AddControllers();
+
+            var stringConnection = configuration.GetConnectionString("SqliteStringConnection");
+            services.AddSingleton<IStorage>(new SqliteStorage(stringConnection));
+            services.AddCors(opt =>
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .WithOrigins(configuration["client"]);
+                }));
+
+            return services;
+        }
+    }
+}
