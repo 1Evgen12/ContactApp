@@ -29,7 +29,7 @@ namespace ContactApp.API.Storage
                     Name = reader.GetString(1),
                     Email = reader.GetString(2),
                     PhoneNumber = reader.IsDBNull(3)?null:reader.GetString(3),
-                    Address = reader.IsDBNull(3) ? null : reader.GetString(4)
+                    Address = reader.IsDBNull(4) ? null : reader.GetString(4)
                 });
             }
             return contacts;
@@ -48,7 +48,7 @@ namespace ContactApp.API.Storage
                 contact.Name = reader.GetString(1);
                 contact.Email = reader.GetString(2);
                 contact.PhoneNumber = reader.IsDBNull(3) ? null : reader.GetString(3);
-                contact.Address = reader.IsDBNull(3) ? null : reader.GetString(4);              
+                contact.Address = reader.IsDBNull(4) ? null : reader.GetString(4);              
             }
 
             return contact;

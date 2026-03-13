@@ -20,7 +20,7 @@ const App = () => {
       id: Id,
       name: contactName,
       email: contactEmail,
-      phone: contactPhone,
+      phoneNumber: contactPhone,
       address: contactAddress
     }
     axios.post(url, item);

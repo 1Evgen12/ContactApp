@@ -3,7 +3,7 @@
     "ContactApp": {
       "commandName": "Project",
       "launchBrowser": true,
-      "dotnetRunMessages": false,
+      "dotnetRunMessages": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
