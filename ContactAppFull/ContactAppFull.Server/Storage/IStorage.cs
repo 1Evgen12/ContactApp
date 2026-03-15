@@ -1,7 +1,7 @@
-﻿using ContactApp.API.ModelDto;
-using ContactApp.API.Model;
+﻿using ContactAppFull.Server.ModelDto;
+using ContactAppFull.Server.Model;
 
-namespace ContactApp.API.Storage
+namespace ContactAppFull.Server.Storage
 {
     public interface IStorage
     {

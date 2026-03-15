@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ContactApp.API.Controllers
+namespace ContactAppFull.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BaseController:ControllerBase
+    public class BaseController : ControllerBase
     {
     }
 }

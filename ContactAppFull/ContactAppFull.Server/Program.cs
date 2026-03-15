@@ -1,4 +1,4 @@
-using ContactApp.API.Extensions;
+using ContactAppFull.Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddServiceCollection(builder.Configuration);

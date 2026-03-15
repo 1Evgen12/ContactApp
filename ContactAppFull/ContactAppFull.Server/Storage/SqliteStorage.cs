@@ -1,8 +1,9 @@
-﻿using ContactApp.API.Model;
-using ContactApp.API.ModelDto;
+﻿using ContactAppFull.Server.Model;
+using ContactAppFull.Server.ModelDto;
+using ContactAppFull.Server.Storage;
 using Microsoft.Data.Sqlite;
 
-namespace ContactApp.API.Storage
+namespace ContactAppFull.Server.Storage
 {
     public class SqliteStorage : IStorage
     {

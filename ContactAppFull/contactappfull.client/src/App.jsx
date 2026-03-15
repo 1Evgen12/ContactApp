@@ -3,7 +3,7 @@ import TableContact from "./layout/TableContact/TableContact";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
-const baseApiUrl = process.env.REACT_APP_API_URL;
+const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const App = () => {
   const [contacts, setContacts] = useState([]);

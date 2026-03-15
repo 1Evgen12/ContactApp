@@ -1,10 +1,9 @@
-﻿using ContactApp.API.Storage;
-
-namespace ContactApp.API.Extensions
+﻿using ContactAppFull.Server.Storage;
+namespace ContactAppFull.Server.Extensions
 {
     public static class ApplicationServiceCollectionExtension
     {
-        public static IServiceCollection AddServiceCollection(this IServiceCollection services, 
+        public static IServiceCollection AddServiceCollection(this IServiceCollection services,
             ConfigurationManager configuration)
         {
 

@@ -1,0 +1,6 @@
+@ContactAppFull.Server_HostAddress = http://localhost:5000 
+
+GET {{ContactAppFull.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###5143

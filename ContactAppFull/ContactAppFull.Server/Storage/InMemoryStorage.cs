@@ -1,5 +1,6 @@
-﻿using ContactApp.API.ModelDto;
-using ContactApp.API.Model;
+﻿using ContactAppFull.Server.Model;
+using ContactAppFull.Server.ModelDto;
+using ContactAppFull.Server.Storage;
 
 namespace ContactApp.API.Storage
 {
@@ -93,5 +94,10 @@ namespace ContactApp.API.Storage
             }
             return false;
         }
+
+        /*public bool UpdateContact(ContactDto contactDto, int id)
+        {
+            throw new NotImplementedException();
+        }*/
     }
 }
