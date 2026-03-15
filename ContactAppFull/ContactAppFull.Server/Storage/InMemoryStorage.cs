@@ -1,8 +1,7 @@
 ﻿using ContactAppFull.Server.Model;
 using ContactAppFull.Server.ModelDto;
-using ContactAppFull.Server.Storage;
 
-namespace ContactApp.API.Storage
+namespace ContactAppFull.Server.Storage
 {
     public class InMemoryStorage: IStorage
     {
@@ -38,16 +37,16 @@ namespace ContactApp.API.Storage
             }
             return null;
         }
-        public bool Add(Contact contact) {
+        public Contact Add(Contact contact) {
 
             foreach (var item in Contacts)
             {
                 if (item.ID == contact.ID) 
-                    return false;
+                    return null;
             }
 
             Contacts.Add (contact);
-            return true;
+            return contact;
         }
 
         public bool Remove(int id) {
@@ -94,10 +93,5 @@ namespace ContactApp.API.Storage
             }
             return false;
         }
-
-        /*public bool UpdateContact(ContactDto contactDto, int id)
-        {
-            throw new NotImplementedException();
-        }*/
     }
 }

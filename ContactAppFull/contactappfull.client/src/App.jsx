@@ -12,19 +12,18 @@ const App = () => {
     axios.get(url).then(
       res => setContacts(res.data)
     );
-  }, []);
+  });
 
   const addContact = (contactName, contactEmail, contactPhone, contactAddress) => {
-    const Id = contacts.length == 0 ? 1 : Math.max(...contacts.map(e => e.id)) + 1;
     const item = {
-      id: Id,
       name: contactName,
       email: contactEmail,
       phoneNumber: contactPhone,
       address: contactAddress
     }
-    axios.post(url, item);
-    setContacts([...contacts, item]);
+      axios.post(url, item).then(
+          response => setContacts([...contacts, response.data])
+      );
   }
 
   const deleteContact = (id) => {

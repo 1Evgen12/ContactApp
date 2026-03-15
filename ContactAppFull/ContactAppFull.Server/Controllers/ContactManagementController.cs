@@ -15,8 +15,8 @@ public class ContactManagementController : BaseController
     [HttpPost("contacts")]
     public IActionResult Create([FromBody] Contact contact)
     {
-        bool res = storage.Add(contact);
-        if (res) return Created();
+        Contact res = storage.Add(contact);
+        if (res!=null) return Created();
         return Conflict("Контакт с таким уже ID существует");
     }
 

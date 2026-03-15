@@ -54,19 +54,21 @@ namespace ContactAppFull.Server.Storage
 
             return contact;
         }
-        public bool Add(Contact contact)
+        public Contact Add(Contact contact)
         {
             using var connection = new SqliteConnection(connectionString);
             connection.Open();
             var command = connection.CreateCommand();          
-            string sql = "INSERT INTO contacts(name, email, phone, address) VALUES (@name, @email, @phone, @address);";
+            string sql = "INSERT INTO contacts(name, email, phone, address) VALUES (@name, @email, @phone, @address);" +
+                "SELECT last_insert_rowid();";
             command.CommandText = sql;
             command.Parameters.AddWithValue("@name", contact.Name);
             command.Parameters.AddWithValue("@email", contact.Email);
             command.Parameters.AddWithValue("@phone", contact.PhoneNumber);
             command.Parameters.AddWithValue("@address", contact.Address);
-            //Console.WriteLine("sql >> "+sql);
-            return command.ExecuteNonQuery()>0;
+
+            contact.ID = Convert.ToInt32(command.ExecuteScalar());
+            return contact;
         }
 
         public bool UpdateContact(ContactDto contactDto, int id)
