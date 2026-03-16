@@ -1,4 +1,6 @@
-﻿using ContactAppFull.Server.Storage;
+﻿using ContactAppFull.Server.DataContext;
+using ContactAppFull.Server.Storage;
+using Microsoft.EntityFrameworkCore;
 namespace ContactAppFull.Server.Extensions
 {
     public static class ApplicationServiceCollectionExtension
@@ -17,9 +19,10 @@ namespace ContactAppFull.Server.Extensions
                 });
             });
             services.AddControllers();
-
             var stringConnection = configuration.GetConnectionString("SqliteStringConnection");
-            services.AddSingleton<IStorage>(new SqliteStorage(stringConnection));
+            services.AddDbContext<SqliteDbContext>(opt => opt.UseSqlite(stringConnection));
+            //services.AddSingleton<IStorage>(new SqliteStorage(stringConnection));
+            services.AddScoped<IStorage, SqliteEfStorage>();
             services.AddCors(opt =>
                 opt.AddPolicy("CorsPolicy", policy =>
                 {

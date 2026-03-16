@@ -2,7 +2,7 @@
   "profiles": {
     "ContactApp": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "dotnetRunMessages": true,
       "launchUrl": "swagger",
       "environmentVariables": {
