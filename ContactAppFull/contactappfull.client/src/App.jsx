@@ -2,6 +2,7 @@ import FormContact from "./layout/FormContact/FormContact";
 import TableContact from "./layout/TableContact/TableContact";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { Route, Routes } from "react-router-dom";
 
 const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -21,9 +22,9 @@ const App = () => {
       phoneNumber: contactPhone,
       address: contactAddress
     }
-      axios.post(url, item).then(
-          response => setContacts([...contacts, response.data])
-      );
+    axios.post(url, item).then(
+      response => setContacts([...contacts, response.data])
+    );
   }
 
   const deleteContact = (id) => {
@@ -33,19 +34,23 @@ const App = () => {
 
   return (
     <div className="container mt-5">
-      <div className="card">
-        <div className="card-header">
-          <h1>Список контактов</h1>
-        </div>
-
-        <div className="card-body">
-          <TableContact
-            contacts={contacts}
-            deleteContact={deleteContact}
-          />
-          <FormContact addContact={addContact} />
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={
+          <div className="card">
+            <div className="card-header">
+              <h1>Список контактов</h1>
+            </div>
+            <div className="card-body">
+              <TableContact
+                contacts={contacts}
+                deleteContact={deleteContact}
+              />
+              <FormContact addContact={addContact} />
+            </div>
+          </div>
+        } />
+        <Route path="contact/:id" element={<>Hello</>} />
+      </Routes>
     </div>
   );
 }
