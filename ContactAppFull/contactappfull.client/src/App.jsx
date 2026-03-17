@@ -14,7 +14,7 @@ const App = () => {
     axios.get(url).then(
       res => setContacts(res.data)
     );
-  });
+  }, []);
 
   const addContact = (contactName, contactEmail, contactPhone, contactAddress) => {
     const item = {
