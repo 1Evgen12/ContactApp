@@ -4,22 +4,38 @@ import axios from "axios";
 const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ContactDetails = () => {
-    const [contact, setContact] = useState({ name: "", email: "" });
+    const [contact, setContact] = useState({ name: "", email: "", phoneNumber: "", address: "" });
     const { id } = useParams();
     const navigate = useNavigate();
-
     useEffect(() => {
         const url = `${baseApiUrl}/contacts/${id}`;
-        console.log(url);
         axios.get(url).then(
             response => setContact(response.data)
         ).catch(
             err => {
-                console.log(err);
                 navigate("/");
             }
         )
     }, [id, navigate])
+
+    const handleRemove = () => {
+        const url = `${baseApiUrl}/contacts/${id}`;
+        if (window.confirm("Вы уверены?")) {
+            axios.delete(`${url}`).then(
+                navigate("/")
+            ).catch(
+                console.log("Ошибка удаления")
+            );
+        }
+    }
+    const handleUpdate = () => {
+        const url = `${baseApiUrl}/contacts/${id}`;
+        axios.put(url, contact).then(
+            navigate("/")
+        ).catch(
+            console.log("Ошибка обновления")
+        );
+    }
 
     return <div className="container mt-5">
         <h2>Детали контакта</h2>
@@ -29,7 +45,7 @@ const ContactDetails = () => {
                 className="form-control"
                 type="text"
                 value={contact.name}
-                onChange={e => { }}
+                onChange={e => { setContact({ ...contact, name: e.target.value }) }}
             />
         </div>
         <div className="mb-3">
@@ -38,7 +54,7 @@ const ContactDetails = () => {
                 className="form-control"
                 type="email"
                 value={contact.email}
-                onChange={e => { }}
+                onChange={e => { setContact({ ...contact, email: e.target.value }) }}
             />
         </div>
         <div className="mb-3">
@@ -47,7 +63,7 @@ const ContactDetails = () => {
                 className="form-control"
                 type="text"
                 value={contact.phoneNumber}
-                onChange={e => { }}
+                onChange={e => { setContact({ ...contact, phoneNumber: e.target.value }) }}
             />
         </div>
         <div className="mb-3">
@@ -56,25 +72,24 @@ const ContactDetails = () => {
                 className="form-control"
                 type="text"
                 value={contact.address}
-                onChange={e => { }}
+                onChange={e => { setContact({ ...contact, address: e.target.value }) }}
             />
         </div>
         <button
             className="btn btn-primary me-2"
-            onClick={(e) => { }}>
+            onClick={() => { handleUpdate() }}>
             Обновить
         </button>
         <button
             className="btn btn-danger me-2"
-            onClick={(e) => { }}>
+            onClick={() => { handleRemove() }}>
             Удалить
         </button>
         <button
             className="btn btn-secondary me-2"
-            onClick={(e) => { }}>
+            onClick={() => { navigate("/") }}>
             Назад
         </button>
     </div>
 }
-
 export default ContactDetails;
