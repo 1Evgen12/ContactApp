@@ -3,6 +3,7 @@ import TableContact from "./layout/TableContact/TableContact";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Route, Routes } from "react-router-dom";
+import ContactDetails from "./layout/ContactDetails/ContactDetails";
 
 const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -49,7 +50,7 @@ const App = () => {
             </div>
           </div>
         } />
-        <Route path="contact/:id" element={<>Hello</>} />
+        <Route path="contact/:id" element={<ContactDetails />} />
       </Routes>
     </div>
   );
