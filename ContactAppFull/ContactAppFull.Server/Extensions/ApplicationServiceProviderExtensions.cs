@@ -10,13 +10,15 @@ namespace ContactAppFull.Server.Extensions
             IConfiguration configuration)
         {
             using var scope = services.CreateScope();
-            var storage = scope.ServiceProvider.GetService<IStorage>();
-            var dbStorage = storage as SqliteStorage;
-            if (dbStorage != null) {
-                string connectionString = configuration.GetConnectionString("SqliteStringConnection");
+            //var storage = scope.ServiceProvider.GetService<IStorage>();
+            //var dbStorage = storage as SqliteStorage;
+            //if (dbStorage != null) {
+            //    string connectionString = configuration.GetConnectionString("SqliteStringConnection");
 
-                new FakerInitializer(connectionString).Initialize();
-            }
+            //    new FakerInitializer(connectionString).Initialize();
+            //}
+            var initializer = scope.ServiceProvider.GetRequiredService<IInitializer>();
+            initializer.Initialize();
             return services;
         }
     }

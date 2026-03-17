@@ -5,9 +5,9 @@ using ContactAppFull.Server.Storage;
 namespace ContactAppFull.Server.Controllers;
 public class ContactManagementController : BaseController
 {
-    private readonly IStorage storage;
+    private readonly IPaginationStorage storage;
 
-    public ContactManagementController(IStorage storage)
+    public ContactManagementController(IPaginationStorage storage)
     {
         this.storage = storage;
     }
@@ -25,8 +25,9 @@ public class ContactManagementController : BaseController
     {
         return Ok(storage.GetContacts());
     }
+
     [HttpGet("contacts/{id}")]
-    public ActionResult<Contact> GetContactById(int id)
+    public ActionResult<Contact> GetContact(int id)
     {
         if (id <= 0)
             return BadRequest("Некорректный id");

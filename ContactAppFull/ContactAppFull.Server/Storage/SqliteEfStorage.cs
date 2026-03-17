@@ -6,7 +6,7 @@ namespace ContactAppFull.Server.Storage
 {
     public class SqliteEfStorage:IStorage
     {
-        private readonly SqliteDbContext context;
+        protected readonly SqliteDbContext context;
 
         public SqliteEfStorage(SqliteDbContext context)
         {
@@ -19,10 +19,10 @@ namespace ContactAppFull.Server.Storage
             return contact;
         }
 
-        public Contact GetContactById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        //public Contact GetContactById(int id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public List<Contact> GetContacts()
         {

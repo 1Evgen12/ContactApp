@@ -28,15 +28,15 @@ namespace ContactAppFull.Server.Storage
         {
             return this.Contacts;
         }
-        public Contact GetContactById(int id)
-        {
-            foreach (var item in Contacts)
-            {
-                if (item.ID == id)
-                    return item;
-            }
-            return null;
-        }
+        //public Contact GetContactById(int id)
+        //{
+        //    foreach (var item in Contacts)
+        //    {
+        //        if (item.ID == id)
+        //            return item;
+        //    }
+        //    return null;
+        //}
         public Contact Add(Contact contact) {
 
             foreach (var item in Contacts)
