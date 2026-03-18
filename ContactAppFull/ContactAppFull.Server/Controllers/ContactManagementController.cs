@@ -16,7 +16,7 @@ public class ContactManagementController : BaseController
     public IActionResult Create([FromBody] Contact contact)
     {
         Contact res = storage.Add(contact);
-        if (res!=null) return Created();
+        if (res!=null) return CreatedAtAction(nameof(GetContact), new { id = res.ID }, res);
         return Conflict("Контакт с таким уже ID существует");
     }
 
