@@ -21,10 +21,12 @@ const ContactDetails = () => {
     const handleRemove = () => {
         const url = `${baseApiUrl}/contacts/${id}`;
         if (window.confirm("Вы уверены?")) {
-            axios.delete(`${url}`).then(
+            axios.delete(url).then(
                 navigate("/")
             ).catch(
-                console.log("Ошибка удаления")
+                error => {
+                    console.log("Ошибка удаления", error)
+                }
             );
         }
     }
