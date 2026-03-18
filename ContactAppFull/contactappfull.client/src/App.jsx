@@ -10,14 +10,18 @@ const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const App = () => {
   const [contacts, setContacts] = useState([]);
   const location = useLocation();
+  const [updateTrigger, setUpdateTrigger] = useState(false);
+
   useEffect(() => {
     const url = `${baseApiUrl}/contacts`;
     axios.get(url).then(
       res => setContacts(res.data)
     );
-  }, [contacts]);
+  }, [location.pathname]);
 
-
+  const handleUpdateTrigger = () => {
+    setUpdateTrigger(!updateTrigger);
+  }
   const addContact = (contactName, contactEmail, contactPhone, contactAddress) => {
     const item = {
       name: contactName,
@@ -45,7 +49,7 @@ const App = () => {
             </div>
           </div>
         } />
-        <Route path="contact/:id" element={<ContactDetails />} />
+        <Route path="contact/:id" element={<ContactDetails onUpdate={handleUpdateTrigger} />} />
       </Routes>
     </div>
   );

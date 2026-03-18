@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
-const ContactDetails = () => {
+const ContactDetails = (props) => {
     const [contact, setContact] = useState({ name: "", email: "", phoneNumber: "", address: "" });
     const { id } = useParams();
     const navigate = useNavigate();
@@ -21,23 +21,23 @@ const ContactDetails = () => {
     const handleRemove = () => {
         const url = `${baseApiUrl}/contacts/${id}`;
         if (window.confirm("Вы уверены?")) {
-            try {
-                axios.delete(url);
-                navigate("/");
+            axios.delete(url).then(() => {
+                props.onUpdate();
+                navigate("/")
             }
-            catch (error) {
-                console.error("Ошибка удаления", error);
-            }
+            ).catch(
+                console.log("Ошибка удаления")
+            );
         }
     }
     const handleUpdate = () => {
         const url = `${baseApiUrl}/contacts/${id}`;
-        try {
-            axios.put(url, contact);
-            navigate("/");
-        } catch (error) {
-            console.error("Ошибка обновления", error);
-        }
+        axios.put(url, contact).then(() => {
+            props.onUpdate();
+            navigate("/")
+        }).catch(
+            console.error("Ошибка обновления")
+        )
     }
 
     return <div className="container mt-5">
