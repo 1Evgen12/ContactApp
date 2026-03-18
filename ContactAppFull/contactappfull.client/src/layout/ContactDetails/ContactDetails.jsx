@@ -21,22 +21,23 @@ const ContactDetails = () => {
     const handleRemove = () => {
         const url = `${baseApiUrl}/contacts/${id}`;
         if (window.confirm("Вы уверены?")) {
-            axios.delete(url).then(
-                navigate("/")
-            ).catch(
-                error => {
-                    console.log("Ошибка удаления", error)
-                }
-            );
+            try {
+                axios.delete(url);
+                navigate("/");
+            }
+            catch (error) {
+                console.error("Ошибка удаления", error);
+            }
         }
     }
     const handleUpdate = () => {
         const url = `${baseApiUrl}/contacts/${id}`;
-        axios.put(url, contact).then(
-            navigate("/")
-        ).catch(
-            console.log("Ошибка обновления")
-        );
+        try {
+            axios.put(url, contact);
+            navigate("/");
+        } catch (error) {
+            console.error("Ошибка обновления", error);
+        }
     }
 
     return <div className="container mt-5">
