@@ -10,13 +10,13 @@ const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const App = () => {
   const [contacts, setContacts] = useState([]);
   const location = useLocation();
-
   useEffect(() => {
     const url = `${baseApiUrl}/contacts`;
     axios.get(url).then(
       res => setContacts(res.data)
     );
-  }, [location.pathname]);
+  }, [contacts]);
+
 
   const addContact = (contactName, contactEmail, contactPhone, contactAddress) => {
     const item = {
