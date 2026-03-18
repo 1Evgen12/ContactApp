@@ -80,12 +80,12 @@ const ContactDetails = () => {
         </div>
         <button
             className="btn btn-primary me-2"
-            onClick={() => { handleUpdate() }}>
+            onClick={handleUpdate}>
             Обновить
         </button>
         <button
             className="btn btn-danger me-2"
-            onClick={() => { handleRemove() }}>
+            onClick={handleRemove}>
             Удалить
         </button>
         <button
