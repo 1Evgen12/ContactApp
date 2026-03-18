@@ -56,4 +56,18 @@ public class ContactManagementController : BaseController
         if (res) return Ok();
         return BadRequest("Ошибка id");
     }
+
+    [HttpGet("contacts/page")]
+    public IActionResult GetContacts(int pageNumber = 1, int pageSize = 5)
+    {
+        var (contacts, total) = storage.GetContacts(pageNumber, pageSize);
+        var response = new
+        {
+            Contacts = contacts,
+            TotalCount = total,
+            CurrentPage = pageNumber,
+            PageSize = pageSize
+        };
+        return Ok(response);
+    }
 }
