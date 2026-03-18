@@ -15,12 +15,6 @@ const App = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [pageSize] = useState(10);
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber)
-  }
-
-
-  //page?pageNumber=1&pageSize=11
   useEffect(() => {
     const url = `${baseApiUrl}/contacts/page?pageNumber=${currentPage}&pageSize=${pageSize}`;
     axios.get(url).then(
@@ -30,6 +24,9 @@ const App = () => {
       });
   }, [currentPage, pageSize, location.pathname]);
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
   const addContact = (contactName, contactEmail, contactPhone, contactAddress) => {
     const item = {
       name: contactName,
@@ -37,12 +34,16 @@ const App = () => {
       phoneNumber: contactPhone,
       address: contactAddress
     }
-    const url = `${baseApiUrl}/contacts`;
-    axios.post(url, item).then(
-      response => setContacts([...contacts, response.data])
-    )
-  }
+    let url = `${baseApiUrl}/contacts`;
+    axios.post(url, item);
 
+    url = `${baseApiUrl}/contacts/page?pageNumber=${currentPage}&pageSize=${pageSize}`;
+    axios.get(url).then(
+      res => {
+        setContacts(res.data.contacts);
+        setTotalPages(Math.ceil(res.data.totalCount / pageSize));
+      });
+  }
   return (
     <div className="container mt-5">
       <Routes>
