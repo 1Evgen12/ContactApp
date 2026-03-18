@@ -409,3 +409,4 @@ build
 /ContactAppFull/contactappfull.client/*.sln
 /ContactAppFull/contactappfull.client/*.sw?
 /ContactAppFull/contactappfull.client/.env
+/ContactAppFull/ContactAppFull.Server/contacts.db

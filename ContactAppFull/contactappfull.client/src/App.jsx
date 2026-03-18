@@ -1,10 +1,10 @@
-import FormContact from "./layout/FormContact/FormContact";
 import TableContact from "./layout/TableContact/TableContact";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, Link } from "react-router-dom";
 import ContactDetails from "./layout/ContactDetails/ContactDetails";
 import Pagination from "./layout/Pagination/Pagination";
+import AppendContact from "./layout/FormContact/AppendContact";
 
 const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -27,23 +27,6 @@ const App = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
-  const addContact = (contactName, contactEmail, contactPhone, contactAddress) => {
-    const item = {
-      name: contactName,
-      email: contactEmail,
-      phoneNumber: contactPhone,
-      address: contactAddress
-    }
-    let url = `${baseApiUrl}/contacts`;
-    axios.post(url, item);
-
-    url = `${baseApiUrl}/contacts/page?pageNumber=${currentPage}&pageSize=${pageSize}`;
-    axios.get(url).then(
-      res => {
-        setContacts(res.data.contacts);
-        setTotalPages(Math.ceil(res.data.totalCount / pageSize));
-      });
-  }
   return (
     <div className="container mt-5">
       <Routes>
@@ -59,11 +42,16 @@ const App = () => {
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
               />
-              <FormContact addContact={addContact} />
+              <Link
+                to="/append"
+                className="btn btn-success mt-3">
+                Добавить контакт
+              </Link>
             </div>
           </div>
         } />
         <Route path="contact/:id" element={<ContactDetails />} />
+        <Route path="append" element={<AppendContact />} />
       </Routes>
     </div>
   );

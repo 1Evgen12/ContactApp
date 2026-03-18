@@ -33,7 +33,7 @@ namespace ContactAppFull.Server.Seed
                     .RuleFor(c => c.PhoneNumber, f => f.Phone.PhoneNumber())
                     .RuleFor(c => c.Address, f => f.Address.FullAddress());
 
-                var contacts = faker.Generate(100);
+                var contacts = faker.Generate(20);
                 context.Contacts.AddRange(contacts);
                 context.SaveChanges();
             }
