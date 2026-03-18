@@ -4,19 +4,31 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Route, Routes, useLocation } from "react-router-dom";
 import ContactDetails from "./layout/ContactDetails/ContactDetails";
+import Pagination from "./layout/Pagination/Pagination";
 
 const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
   const location = useLocation();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [pageSize] = useState(10);
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
+
+
+  //page?pageNumber=1&pageSize=11
   useEffect(() => {
-    const url = `${baseApiUrl}/contacts`;
+    const url = `${baseApiUrl}/contacts/page?pageNumber=${currentPage}&pageSize=${pageSize}`;
     axios.get(url).then(
-      res => setContacts(res.data)
-    );
-  }, [location.pathname]);
+      res => {
+        setContacts(res.data.contacts);
+        setTotalPages(Math.ceil(res.data.totalCount / pageSize));
+      });
+  }, [currentPage, pageSize, location.pathname]);
 
   const addContact = (contactName, contactEmail, contactPhone, contactAddress) => {
     const item = {
@@ -41,6 +53,11 @@ const App = () => {
             </div>
             <div className="card-body">
               <TableContact contacts={contacts} />
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
               <FormContact addContact={addContact} />
             </div>
           </div>
