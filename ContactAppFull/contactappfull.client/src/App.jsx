@@ -28,6 +28,9 @@ const App = () => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
+  const handleUpdateTrigger = () => {
+    setUpdateTrigger(!updateTrigger);
+  }
   return (
     <div className="container mt-5">
       <Routes>
