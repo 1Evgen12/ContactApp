@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
-const ContactDetails = () => {
+const ContactDetails = (props) => {
     const [contact, setContact] = useState({ name: "", email: "", phoneNumber: "", address: "" });
     const { id } = useParams();
     const navigate = useNavigate();
@@ -21,8 +21,10 @@ const ContactDetails = () => {
     const handleRemove = () => {
         const url = `${baseApiUrl}/contacts/${id}`;
         if (window.confirm("Вы уверены?")) {
-            axios.delete(`${url}`).then(
+            axios.delete(url).then(() => {
+                props.onUpdate();
                 navigate("/")
+            }
             ).catch(
                 console.log("Ошибка удаления")
             );
@@ -30,11 +32,12 @@ const ContactDetails = () => {
     }
     const handleUpdate = () => {
         const url = `${baseApiUrl}/contacts/${id}`;
-        axios.put(url, contact).then(
+        axios.put(url, contact).then(() => {
+            props.onUpdate();
             navigate("/")
-        ).catch(
-            console.log("Ошибка обновления")
-        );
+        }).catch(
+            console.error("Ошибка обновления")
+        )
     }
 
     return <div className="container mt-5">
@@ -77,12 +80,12 @@ const ContactDetails = () => {
         </div>
         <button
             className="btn btn-primary me-2"
-            onClick={() => { handleUpdate() }}>
+            onClick={handleUpdate}>
             Обновить
         </button>
         <button
             className="btn btn-danger me-2"
-            onClick={() => { handleRemove() }}>
+            onClick={handleRemove}>
             Удалить
         </button>
         <button

@@ -14,6 +14,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [pageSize] = useState(10);
+  const [updateTrigger, setUpdateTrigger] = useState(false);
 
   useEffect(() => {
     const url = `${baseApiUrl}/contacts/page?pageNumber=${currentPage}&pageSize=${pageSize}`;
@@ -50,7 +51,7 @@ const App = () => {
             </div>
           </div>
         } />
-        <Route path="contact/:id" element={<ContactDetails />} />
+        <Route path="contact/:id" element={<ContactDetails onUpdate={handleUpdateTrigger} />} />
         <Route path="append" element={<AppendContact />} />
       </Routes>
     </div>
