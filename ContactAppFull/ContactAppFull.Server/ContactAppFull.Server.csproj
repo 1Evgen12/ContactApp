@@ -9,6 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\asset-manifest.json" />
+    <Content Remove="wwwroot\manifest.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\asset-manifest.json" />
+    <None Include="wwwroot\manifest.json" />
+    <None Include="wwwroot\config.js" />
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\static\js\main.a56470f9.js" />
+    <None Include="wwwroot\static\js\main.a56470f9.js.LICENSE.txt" />
+    <None Include="wwwroot\static\js\main.a56470f9.js.map" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bogus" Version="35.6.5" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>9.*-*</Version>

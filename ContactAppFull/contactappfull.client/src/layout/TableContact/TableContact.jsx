@@ -2,6 +2,10 @@ import React from "react";
 import RowTableContact from "./components/RowTableContact";
 
 const TableContact = (props) => {
+
+    //if (!props.contacts) {
+    //    return <div>Загрузка контактов...</div>;
+    //}
     return (
         <table className="table table-hover">
             <thead>
@@ -16,7 +20,7 @@ const TableContact = (props) => {
             </thead>
             <tbody>
                 {
-                    props.contacts.map(
+                    props.contacts?.map(
                         contact => <RowTableContact
                             key={contact.id}
                             id={contact.id}

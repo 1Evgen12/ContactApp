@@ -1,12 +1,12 @@
-import TableContact from "./layout/TableContact/TableContact";
-import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Route, Routes, useLocation, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import ContactDetails from "./layout/ContactDetails/ContactDetails";
-import Pagination from "./layout/Pagination/Pagination";
 import AppendContact from "./layout/FormContact/AppendContact";
+import Pagination from "./layout/Pagination/Pagination";
+import TableContact from "./layout/TableContact/TableContact";
 
-const baseApiUrl = import.meta.env.VITE_REACT_APP_API_URL;
+const baseApiUrl = window.config.apiUrl;//process.env.REACT_APP_API_URL;
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -15,7 +15,6 @@ const App = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [pageSize] = useState(10);
   const [updateTrigger, setUpdateTrigger] = useState(false);
-
   useEffect(() => {
     const url = `${baseApiUrl}/contacts/page?pageNumber=${currentPage}&pageSize=${pageSize}`;
     axios.get(url).then(
